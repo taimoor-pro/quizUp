@@ -1,0 +1,17 @@
+select{
+    background-color:  #232020;
+}
+
+.custom-select {
+    background-color: black;
+    color: rgb(135, 136, 136);
+    border: 1px solid rgb(49, 49, 49);
+    border-radius: none;
+    outline: none;  /* Remove default outline on focus */
+
+    /* Define the styles when the select is focused */
+    &:focus {
+        border-color: rgb(116, 116, 116);  /* Change border color on focus */
+        box-shadow: 0 0 5px rgb(50, 50, 50);  /* Add a box shadow on focus */
+    }
+}
