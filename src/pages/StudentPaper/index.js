@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import ViewerArea from "../../components/modules/ViewerArea";
 
 const StudentPaper = () => {
   return (
-    <div className='text-white fs-4 text-center'>Student Paper</div>
-  )
-}
+    <>
+      <ViewerArea />
+    </>
+  );
+};
 
-export default StudentPaper
+export default StudentPaper;

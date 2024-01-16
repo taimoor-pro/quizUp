@@ -1,24 +1,35 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import React, { Suspense } from "react";
+
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals.js";
 import { persistor, store } from "./redux/store.js";
 import { PersistGate } from "redux-persist/integration/react";
 
-import App from "./App.js";
 import "./index.css";
 
-
+// ** Lazy load app
+const LazyApp = lazy(() => import("./App"));
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Router>
-    <Suspense>
+    <Suspense
+      fallback={
+        <div className="bg-white text-black fs-3 fw-bolder">Loading...</div>
+      }
+    >
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <App />
+          <QueryClientProvider client={queryClient}>
+            <LazyApp />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
         </PersistGate>
       </Provider>
     </Suspense>

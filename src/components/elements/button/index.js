@@ -1,41 +1,50 @@
-import React from 'react';
-import './index.css'
+import React from "react";
+import "./index.css";
 
 const Button = (props) => {
+  const {
+    borderRadius,
+    padding,
+    margin,
+    title,
+    key,
+    backgroundColor,
+    textColor,
+    width,
+    borderColor,
+    onClick,
+    marginLeft,
+    fontWeight,
+    marginTop,
+    fontSize,
+  } = props;
 
-    const { margin, padding, title, backgroundColor, textColor, width, borderColor, onClick, fontWeight } = props
-
-    return (
-        <button
-            onClick={onClick ? onClick : () => { }}
-            className='button-33'
-            // className={`m-0 fs-xs ${nopadding ? "px-0" : "px-4"} ${padding && padding} `}
-            style={{
-
-                backgroundColor: backgroundColor ? backgroundColor : 'white',
-                color: textColor ? textColor : 'black',
-                //height: 52,
-                padding: padding ? padding : 'auto',
-                // width: width ? width : 'auto',
-                // borderRadius: 5,
-                // border: borderColor ? '2px solid' : 'none',
-                fontWeight: fontWeight ? fontWeight : 'normal',
-                // borderColor: borderColor,
-                // boxShadow: '5px 5px 40px grey',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                whiteSpace: "nowrap",
-                fontSize: '14px',
-                lineHeight: '20px',
-                margin: margin ? margin : "0",
-            }}>
-            {
-                title
-            }
-        </button>
-    );
-}
-
+  return (
+    <button
+      onClick={onClick ? onClick : () => { }}
+      className="button-33"
+      style={{
+        backgroundColor: backgroundColor ? backgroundColor : "rgb(139, 0, 58)",
+        color: textColor ? textColor : "black",
+        fontSize: fontSize ? fontSize : "14px",
+        padding: padding ? padding : "auto",
+        width: width ? width : "265px",
+        borderRadius: borderRadius ? borderRadius : "5px",
+        fontWeight: fontWeight ? fontWeight : "normal",
+        display: "flex",
+        fontFamily: "Poppins",
+        justifyContent: "center",
+        alignItems: "center",
+        whiteSpace: "nowrap",
+        fontSize: "14px",
+        lineHeight: "20px",
+        padding: padding ? padding : "2px",
+        margin: margin ? margin : "0",
+      }}
+    >
+      {title}
+    </button>
+  );
+};
 
 export default Button;

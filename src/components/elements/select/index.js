@@ -4,15 +4,16 @@ import "./index.css";
 
 const Select = (props) => {
 
-    const { selected, margin } = props
+    const { selected, margin, bgColor, field, padding, options } = props
     return (
-        <Form.Select style={{
-            margin: margin ? margin : ""
-        }} className='bg-black custom-select border-1  rounded-none' aria-label="Default select example">
+        <Form.Select {...field} style={{
+            margin: margin ? margin : "",
+            padding: padding ? padding : ""
+        }} className={`${bgColor ? 'bg-white custom-select border-1  rounded-none' : 'bg-black custom-select border-1  rounded-none'} `} aria-label="Default select example">
             <option>{selected}</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            {
+                options.map((op, index) => <option key={index} value={op}>{op}</option>)
+            }
         </Form.Select>
     )
 }

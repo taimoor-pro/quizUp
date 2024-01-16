@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let request = axios.create({
-  baseURL: import.meta.env.REACT_APP_BASE_URL,
+  baseURL: process.env.REACT_APP_BASE_URL,
 });
 
 const client = {

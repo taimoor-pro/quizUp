@@ -89,3 +89,8 @@ body {
   .slider.round:before {
     border-radius: 50%;
   }
+
+  .row-spacing {
+    margin-bottom: 10px !important;
+    background-color: #1a1819;
+  }

@@ -1,6 +1,7 @@
 import React from 'react'
 import AuthCard from '../../../components/modules/authentication/authCard'
 import * as yup from "yup";
+import HorizontalLine from '../../../components/elements/horizontalLine';
 
 const ChangePassword = () => {
 
@@ -9,13 +10,7 @@ const ChangePassword = () => {
   }
 
   const regSchema = yup.object().shape({
-    firstname: yup.string().required("Please Enter First name!"),
-    lastname: yup.string().required("Please Enter Last name!"),
-    gender: yup.string().required("Please Select Gender!"),
-    roles: yup.string().required("Please Select Roles!"),
-    email: yup.string().email().required("Please Enter Email!"),
-    password: yup.string().min(5).max(10).required("Please Enter Password!"),
-    confirmPassword: yup.string().oneOf([yup.ref("password"), null]),
+    email: yup.string().required("Please Enter a valid email!")
   });
 
   // });
@@ -39,14 +34,25 @@ const ChangePassword = () => {
   }
   return (
     <>
+      <HorizontalLine
+        title="Reset"
+        marginTop="80px"
+        marginLeft="100px"
+        borderTop="2px solid white"
+        width="100%"
+        id="login"
+      />
       <AuthCard
         title="Reset Password"
         id='changePass'
         schema={regSchema}
         onSubmit={onSubmit}
         LeftprimaryHeading="Reset Password"
-        height = "40vh"
-        width = "800px"
+        // height="70vh"
+        padding="10px"
+        margin="40px 0 0 0"
+        fontSize="50px"
+        width="800px"
         feildsData={[
 
 
@@ -58,22 +64,12 @@ const ChangePassword = () => {
             margin: "10px 0 10px 0"
           },
 
-
-          // {
-          //   id: "role",
-          //   type: "select",
-          //   label: "Role",
-          //   Select: [
-          //     { text: "Admin", value: "Admin" },
-          //     { text: "User", value: "User" },
-          //     { text: "Viewer", value: "Viewer" }
-          //   ],
-          // },
-
-
         ]}
         button={{
           buttonText: "RESET PROJECT",
+          padding: "10px 0",
+          width: "60%",
+          margin: "-20px 0 20px 0"
         }}
 
 

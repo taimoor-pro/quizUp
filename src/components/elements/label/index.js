@@ -4,13 +4,13 @@ import { AiFillEye } from 'react-icons/ai';
 
 const Label = (props) => {
 
-    const { text } = props
+    const { text, color, fontWeight, fontSize, margin } = props
 
     return (
 
         <div className='d-flex justify-content-between' >
 
-            <label htmlFor="label" style={{ color: "white", fontSize:"18px", fontWeight:"bold" }}>{text}</label>
+            <label htmlFor="label" style={{ color: color ? color : "white", fontSize: fontSize ? fontSize : "18px", fontWeight: fontWeight ? fontWeight : "bold", margin: margin ? margin : "" }}>{text}</label>
 
         </div>
 

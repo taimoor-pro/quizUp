@@ -83,14 +83,14 @@ const DragDropFiles = () => {
             />
           </div>
 
-          <input
+          {/* <input
             type="file"
             multiple
             onChange={(event) => setFiles(event.target.files)}
             hidden
             accept="image/png, image/jpeg"
             ref={inputRef}
-          />
+          /> */}
           <div
             style={{
               display: "flex",

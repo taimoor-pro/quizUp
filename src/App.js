@@ -4,8 +4,10 @@ import NavBar from "./components/modules/Navbar";
 
 import Router from "./router/index";
 import { FaUser } from "react-icons/fa";
-import ProfileModal from "./components/modules/Modals/modal";
+
 import { useNavigate } from "react-router-dom";
+// import { QueryClient, QueryClientProvider } from "react-query";
+// import { ReactQueryDevtools } from "react-query/devtools";
 
 function App() {
   localStorage.setItem("adEmail", "admin@example.com");
@@ -38,18 +40,24 @@ function App() {
 
   const handleLogin = () => {
     setIsLoggedIn(true);
+    localStorage.setItem("isLoggedIn", true);
   };
 
   // Function to handle logout
   const handleLogout = () => {
     localStorage.setItem("role", "");
     setIsLoggedIn(false);
+    localStorage.setItem("isLoggedIn", false);
+    navigate("/");
   };
 
   let role = localStorage.getItem("role");
+  // const queryClient = new QueryClient();
+
+  const loginState = localStorage.getItem("isLoggedIn");
   return (
     <>
-      {isLoggedIn && role == "admin" ? (
+      {loginState && role == "admin" ? (
         <NavBar
           id="admin"
           title="Admin"
@@ -59,7 +67,7 @@ function App() {
           feildsData={[
             {
               link: "Create Case",
-              url: "/create-case",
+              url: "/dashboard/admin",
             },
             {
               link: "Genral Feedback",
@@ -72,11 +80,12 @@ function App() {
           ]}
           inputFeildsData={[
             {
-              id: "email",
+              id: "username",
               type: "text",
-              label: "Email *",
-              placeholder: "Enter Your email",
+              label: "Username *",
+              placeholder: "Enter Your username",
               margin: "10px 0 10px 0",
+              defaultValue: "Taimoor",
             },
 
             {
@@ -85,22 +94,16 @@ function App() {
               label: "Password *",
               placeholder: "Enter Your Password",
               margin: "10px 0 10px 0",
+              defaultValue: "123456",
             },
 
             {
-              id: "cpassword",
-              type: "text",
-              label: "Confirm Password *",
-              placeholder: "Enter Your Confirm Password",
+              id: "email",
+              type: "email",
+              label: "Email *",
+              placeholder: "Enter Your Email",
               margin: "10px 0 10px 0",
-            },
-
-            {
-              id: "cpassword",
-              type: "text",
-              label: "Confirm Password *",
-              placeholder: "Enter Your Confirm Password",
-              margin: "10px 0 10px 0",
+              defaultValue: "admin@example.com",
             },
           ]}
           logo="image"
@@ -126,7 +129,7 @@ function App() {
             },
           ]}
         />
-      ) : isLoggedIn && role == "student" ? (
+      ) : loginState && role == "student" ? (
         <NavBar
           id="user"
           title="User"
@@ -136,16 +139,65 @@ function App() {
           feildsData={[
             {
               link: "Work List",
-              url: "",
+              url: "/dashboard/student",
+            },
+          ]}
+          select={[
+            {
+              id: "location",
+              label: "Location *",
+              selectedOption: "Select Location",
+              margin: "10px 0 10px 0",
+            },
+            {
+              id: "gender",
+              label: "Gender *",
+              selectedOption: "Select Gender",
+              margin: "10px 0 10px 0",
+            },
+            {
+              id: "curentStatus",
+              label: "Current Status *",
+              selectedOption: "Current Status",
+              margin: "10px 0 10px 0",
+            },
+            {
+              id: "currentYear",
+              label: "Current Year Of Medical Traning *",
+              selectedOption: "Current Year Of Medical Traning",
+              margin: "10px 0 10px 0",
+            },
+            {
+              id: "selectField",
+              label: "Select Your Field *",
+              selectedOption: "Select Your Field",
+              margin: "10px 0 10px 0",
             },
           ]}
           inputFeildsData={[
             {
-              id: "email",
+              id: "username",
               type: "text",
-              label: "Email *",
-              placeholder: "Enter Your email",
+              label: "Username *",
+              placeholder: "Enter Your username",
               margin: "10px 0 10px 0",
+              defaultValue: "Albert",
+            },
+            {
+              id: "email",
+              type: "email",
+              label: "Email *",
+              placeholder: "Enter Your Email",
+              margin: "10px 0 10px 0",
+              defaultValue: "admin@example.com",
+            },
+            {
+              id: "age",
+              type: "number",
+              label: "Age *",
+              placeholder: "Enter Your Age",
+              margin: "10px 0 10px 0",
+              defaultValue: "18",
             },
 
             {
@@ -154,14 +206,7 @@ function App() {
               label: "Password *",
               placeholder: "Enter Your Password",
               margin: "10px 0 10px 0",
-            },
-
-            {
-              id: "cpassword",
-              type: "text",
-              label: "Confirm Password *",
-              placeholder: "Enter Your Confirm Password",
-              margin: "10px 0 10px 0",
+              defaultValue: "123456",
             },
           ]}
           logo="image"
@@ -182,7 +227,7 @@ function App() {
         />
       ) : null}
 
-      <Router isLoggedIn={isLoggedIn} onLogin={handleLogin} />
+      <Router isLoggedIn={loginState} onLogin={handleLogin} />
     </>
   );
 }

@@ -1,0 +1,21 @@
+/* DataTable.css */
+body{
+    background-color: #232020;
+}
+.highlight-row {
+    background-color: #1a1819; 
+}
+
+.bg-transparent{
+    background-color: transparent !important;
+}
+
+.textColor{
+    color: #f0b310;
+}
+
+.custom-table{
+    width: 100%;
+    color: white;
+    background-color: transparent;
+}

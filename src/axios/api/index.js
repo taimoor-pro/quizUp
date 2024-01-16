@@ -1,12 +1,20 @@
 import _ from "lodash";
 import { toast } from "react-toastify";
-import { convertHtmlToString } from "../../utils";
 import { endpoints } from "../endpoints";
-import { generateFile, getUnixTime } from "../../utils/generic.js";
-import { locales } from "../../i18n/helper";
-import { BiError } from "react-icons/bi";
-import i18next from "i18next";
-import { setStaticTopics, setTopics } from "../../redux/reducers/Facets";
+
+export const getFackData = () => {
+  return endpoints
+    .getFackData()
+    .then((res) => {
+      if (res.status === 200) {
+        console.log("Successfully !!", res);
+        return res.data;
+      }
+    })
+    .catch((err) => {
+      console.log("Error message", err);
+    });
+};
 
 export const getPlatformInsights = (setData, setLoading) => {
   return endpoints
@@ -22,7 +30,6 @@ export const getPlatformInsights = (setData, setLoading) => {
     });
 };
 
-
 export const getResourcesByIdentifier = (id, setData) => {
   return endpoints
     .getResourcesByIdentifier(id)
@@ -31,4 +38,3 @@ export const getResourcesByIdentifier = (id, setData) => {
     })
     .catch((err) => console.log("ERROR", err));
 };
-

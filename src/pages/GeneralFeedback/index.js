@@ -1,8 +1,21 @@
 import React from "react";
 import DataTable from "../../components/modules/DataTable";
-import NavBar from "../../components/modules/Navbar";
+import { getFackData } from "../../axios/api";
+import { useQuery } from "react-query";
 
 const GeneralFeedback = () => {
+  const { data, isLoading, isError } = useQuery("fakeData", getFackData);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (isError) {
+    return <p>Error fetching data</p>;
+  }
+
+  console.log(data, "MY DATA");
+
   return (
     <>
       <DataTable
@@ -32,6 +45,7 @@ const GeneralFeedback = () => {
             heading: "Creation Date",
           },
         ]}
+        DataList={data.products}
       />
     </>
   );

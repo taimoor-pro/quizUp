@@ -4,6 +4,9 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../../router/helper";
 import { notifyError, notifySuccess } from "../../../utils/toasts";
+import { Swal } from "sweetalert2";
+import HorizontalLine from "../../../components/elements/horizontalLine";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = (props) => {
   const { onLogin } = props;
@@ -21,7 +24,8 @@ const Login = (props) => {
   });
 
   // });
-  const onSubmit = (value) => {
+
+  const onSubmit = async (value) => {
     console.log(value, "sadsaf");
     let getUserEmail = localStorage.getItem("stEmail");
     let getUserPass = localStorage.getItem("stPassword");
@@ -32,16 +36,21 @@ const Login = (props) => {
 
     if (getUserEmail == value.email && getUserPass == value.password) {
       localStorage.setItem("role", "student");
-      navigate(routes.USER);
-      notifySuccess("Student Login Successfully");
+      toast.success('Successfully Student Login!')
       onLogin();
+      setTimeout(() => {
+        navigate(routes.USER);
+      }, 1500);
     } else if (getAdminEmail == value.email && getAdminPass == value.password) {
       localStorage.setItem("role", "admin");
-      navigate(routes.ADMIN);
-      notifySuccess("Admin Login Successfully");
+      toast.success('Successfully Admin Login!')
       onLogin();
+      setTimeout(() => {
+        navigate(routes.ADMIN);
+      }, 1500);
+
     } else {
-      notifyError("User Does Not Exist");
+      toast.error('Invalid Credentials!')
     }
 
     // console.log(value)
@@ -61,40 +70,60 @@ const Login = (props) => {
     //   }
   };
   return (
-    <AuthCard
-      title="Login"
-      id="login"
-      schema={regSchema}
-      onSubmit={onSubmit}
-      height="60vh"
-      width="400px"
-      type="submit"
-      LeftprimaryHeading="Login Your Account"
-      remeberMe="Remember Me"
-      forgotPass="Forgot Password ?"
-      signUp="Not Registered Yet?"
-      feildsData={[
-        {
-          id: "email",
-          type: "text",
-          label: "Email *",
-          placeholder: "Enter Your email",
-          margin: "10px 0 10px 0",
-        },
+    <>
+      <Toaster
+        position="bottom-right"
+        reverseOrder={false}
+      />
+      <HorizontalLine
+        title="Login"
+        marginTop="80px"
+        marginLeft="100px"
+        borderTop="2px solid white"
+        width="100%"
+        id="login"
+      />
+      <AuthCard
+        title="Login"
+        id="login"
 
-        {
-          id: "password",
-          type: "password",
-          label: "Password *",
-          placeholder: "Enter Your Password",
-          margin: "10px 0 10px 0",
-        },
-      ]}
-      button={{
-        buttonText: "LOG IN",
-      }}
-      handle={handle}
-    />
+        schema={regSchema}
+        onSubmit={onSubmit}
+        height="70vh"
+        padding="10px"
+        margin="40px 0 0 0"
+        fontSize="50px"
+        type="submit"
+        LeftprimaryHeading="Login Your Account"
+        remeberMe="Remember Me"
+        forgotPass="Forgot Password ?"
+        signUp="Not Registered Yet?"
+        feildsData={[
+          {
+            id: "email",
+            type: "text",
+            label: "Email *",
+            placeholder: "Enter Your email",
+            margin: "10px 0 10px 0",
+          },
+
+          {
+            id: "password",
+            type: "password",
+            label: "Password *",
+            placeholder: "Enter Your Password",
+            margin: "10px 0 10px 0",
+          },
+        ]}
+        button={{
+          buttonText: "LOG IN",
+          padding: "10px 0",
+          width: "80%",
+          margin: "-20px 0 20px 0"
+        }}
+        handle={handle}
+      />
+    </>
   );
 };
 

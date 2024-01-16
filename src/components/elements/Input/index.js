@@ -36,20 +36,21 @@ const Input = (props) => {
           placeholder={placeholder}
           type={showPassword ? "text" : type}
           id={id}
-          //  className={`m-0 fs-xs ${nopadding ? "px-0" : "px-4"} ${padding && padding} `}
           style={{
             width: "100%",
             color: textColor ? textColor : "black",
             fontWeight: fontWeight ? fontWeight : "normal",
             fontSize: fontSize ? fontSize : 40,
             border: "none",
+            outline: "0",
+            height: "6vh",
             backgroundColor: "transparent",
             lineHeight: "20px",
             fontFamily: fontFamily ? fontFamily : "sans-serif",
           }}
         />
         {type === "password" && (
-          <div onClick={togglePasswordVisibility} style={{ cursor: "pointer" }}>
+          <div onClick={togglePasswordVisibility} style={{ cursor: "pointer", margin: "7px" }}>
             {showPassword ? (
               <AiFillEyeInvisible size={20} color={textColor} />
             ) : (

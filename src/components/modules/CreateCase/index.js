@@ -1,19 +1,33 @@
-import React from "react";
+  import React from "react";
+  import * as yup from "yup";
+  import DragDropFiles from "../../elements/dragDrop";
+  import CommentFeedback from "../../../pages/CommentFeedback";
 
-import FieldBar from "../../elements/FieldBar";
-import DragDropFiles from "../../elements/dragDrop";
-import TextArea from "../../elements/textArea";
+  const CreateCase = () => {
+    const titleAndCommentScema = yup.object().shape({
+      title: yup.string().required("Please Enter Title!"),
+      note: yup.string().required("Please Enter Comment!"),
+    });
 
-const CreateCase = () => {
-  return (
-    <div className="d-flex justify-content-center align-items-center flex-column">
 
-      <FieldBar />
-      <DragDropFiles />
-      <TextArea />
+    const onSubmit = (values) => {
+      console.log("CreateCase Form Values:", values);
+    };
 
-    </div>
-  );
-};
+    return (
 
-export default CreateCase;
+      <>
+        <CommentFeedback onSubmitVal={onSubmit} id="updload" nameOf="title" otherFormSchema={titleAndCommentScema} widtth="50%" height="20vh" desription1="Title" title1="Upload Case" placeholder="Enter the case Title" design={false} />
+
+        <div className="d-flex justify-content-center align-items-center flex-column">
+          <DragDropFiles />
+        </div>
+
+        <CommentFeedback onSubmitVal={onSubmit} nameOf="note" otherFormSchema={titleAndCommentScema} id="updload" widtth="50%" height="20vh" desription1="Note" placeholder="Comments" design={false} buttons={[
+          { button: "Upload", bgColor: "#8b003a", margin: "0 0 0 -195px" }
+        ]} />
+      </>
+    );
+  };
+
+  export default CreateCase;

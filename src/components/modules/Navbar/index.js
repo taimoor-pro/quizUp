@@ -27,6 +27,7 @@ function NavBar(props) {
     handleCloseModal,
     updateProfile,
     inputFeildsData,
+    select,
   } = props;
 
   console.log(feildsData, "asocuxsa");
@@ -43,8 +44,8 @@ function NavBar(props) {
 
   return (
     <>
-      <AppBar position="static" sx={{ backgroundColor: "black" }}>
-        <Container maxWidth="xl">
+      <AppBar position="static" sx={{ backgroundColor: "black" }} >
+        <Container maxWidth="xl" style={{padding:"10px"}}>
           <Toolbar disableGutters>
             {/* Logo */}
             <Typography
@@ -55,9 +56,7 @@ function NavBar(props) {
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
                 fontWeight: 700,
-                letterSpacing: ".3rem",
                 color: "inherit",
                 textDecoration: "none",
               }}
@@ -79,9 +78,15 @@ function NavBar(props) {
                 <>
                   <Link
                     key={page.id}
-                    sx={{ my: 2, color: "white", display: "block" }}
-                    className="text-white text-decoration-none fs-5 mx-3"
+                    sx={{
+                      my: 2,
+                      color: "white",
+                      display: "block",
+                      fontWeight: 100,
+                    }}
+                    className="text-white text-decoration-none mx-3"
                     to={page.url}
+                    style={{fontSize:"17px"}}
                   >
                     {page.link}
                   </Link>
@@ -152,13 +157,14 @@ function NavBar(props) {
           </Toolbar>
         </Container>
       </AppBar>
-      {console.log(show, "show")}
+
       <ProfileModal
         show={show}
         handleClose={handleCloseModal}
         id={id}
         title={updateProfile}
         inputFeildsData={inputFeildsData}
+        select={select}
       />
     </>
   );
