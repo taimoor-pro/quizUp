@@ -31,7 +31,21 @@ const Router = (props) => {
       <Routes>
         {/* Public Routes */}
 
-        <Route path={routes.HOME} element={<Login onLogin={onLogin} />} />
+        {isLoggedIn && role ? (
+          <>
+          {
+            role == "admin" && <Route path="/" element={<Admin />} />
+          }
+          {
+            role == "user" &&     <Route path="/" element={<User />} />
+          }
+          
+        
+          </>
+        ) : (
+          <Route path={routes.HOME} element={<Login onLogin={onLogin} />} />
+        )}
+
         <Route path={routes.FORGOT_PASSWORD} element={<ChangePassword />} />
         <Route path={routes.SIGNUP} element={<SignUp />} />
 
