@@ -44,8 +44,8 @@ function NavBar(props) {
 
   return (
     <>
-      <AppBar position="static" sx={{ backgroundColor: "black" }} >
-        <Container maxWidth="xl" style={{padding:"10px"}}>
+      <AppBar position="static" sx={{ backgroundColor: "black" }}>
+        <Container maxWidth="xl" style={{ padding: "10px" }}>
           <Toolbar disableGutters>
             {/* Logo */}
             <Typography
@@ -86,7 +86,7 @@ function NavBar(props) {
                     }}
                     className="text-white text-decoration-none mx-3"
                     to={page.url}
-                    style={{fontSize:"17px"}}
+                    style={{ fontSize: "17px" }}
                   >
                     {page.link}
                   </Link>
@@ -159,7 +159,7 @@ function NavBar(props) {
       </AppBar>
 
       <ProfileModal
-        show={show}
+        open={show}
         handleClose={handleCloseModal}
         id={id}
         title={updateProfile}

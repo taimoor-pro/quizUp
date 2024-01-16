@@ -1,6 +1,5 @@
 import React from "react";
 import DataTable from "../../components/modules/DataTable";
-import NavBar from "../../components/modules/Navbar";
 
 const StudentResultList = () => {
   return (

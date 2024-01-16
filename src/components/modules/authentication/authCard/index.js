@@ -120,7 +120,7 @@ const AuthCard = (props) => {
 
                     {select?.map((item) => (
                       <Controller
-                        key={item.id} // Add a unique key for each mapped item
+                        key={item.id} 
                         name={item.id}
                         control={control}
                         render={({ field }) => (

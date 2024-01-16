@@ -14,7 +14,7 @@ const GeneralFeedback = () => {
     return <p>Error fetching data</p>;
   }
 
-  console.log(data, "MY DATA");
+  console.log(isLoading, "MY DATA");
 
   return (
     <>
