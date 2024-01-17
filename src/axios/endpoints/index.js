@@ -6,7 +6,7 @@ export const endpoints = {
   },
 
   login: (data) => {
-    return client.post("api/Account/login", data);
+    return client.post("login", data);
   },
 
   register: (data, headers) => {

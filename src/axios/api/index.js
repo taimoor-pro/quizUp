@@ -31,12 +31,13 @@ export const useLoginMutation = (dispatch, setData, nevigate) => {
     const res = await endpoints.login(data);
     if (res.data.msg == null && res.status === 200) {
       toast.success("Login Successfully!! 😍");
+      console.log(res.data, "data");
       setData(res.data);
       dispatch && dispatch(handleLogin(res.data));
-      if (res?.data?.data?.userType == 0) {
+      if (res?.data?.userType == "user") {
         nevigate(routes.USER);
       }
-      if (res?.data?.data?.userType == 1) {
+      if (res?.data?.userType == "admin") {
         nevigate(routes.USER);
       }
       return res.data;

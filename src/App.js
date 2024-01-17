@@ -76,14 +76,14 @@ function App() {
   const { isLoggedIn } = useSelector((state) => state.authentication);
   const { userDetails } = useSelector((state) => state.authentication);
   {
-    console.log(isLoggedIn && userDetails?.data?.userType, "hiadh");
+    console.log(isLoggedIn && userDetails?.userType, "hiadh");
   }
   return (
     <>
       <Toaster position="bottom-right" reverseOrder={false} />
       {isLoggedIn == true && (
         <>
-          {isLoggedIn && userDetails?.data?.userType == 1 ? (
+          {isLoggedIn && userDetails?.userType == "admin" ? (
             <NavBar
               id="admin"
               title="Admin"
@@ -157,7 +157,7 @@ function App() {
                 },
               ]}
             />
-          ) : isLoggedIn && userDetails?.data?.userType == 0 ? (
+          ) : isLoggedIn && userDetails?.userType == "user" ? (
             <NavBar
               id="user"
               title="User"

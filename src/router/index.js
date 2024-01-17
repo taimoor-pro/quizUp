@@ -35,12 +35,12 @@ const Router = (props) => {
       <Routes>
         {/* Public Routes */}
 
-        {isLoggedIn && userDetails?.data?.userType ? (
+        {isLoggedIn && userDetails?.userType ? (
           <>
-            {userDetails?.data?.userType == 1 && (
+            {userDetails?.userType == "admin" && (
               <Route path="/" element={<Admin />} />
             )}
-            {userDetails?.data?.userType === 0 && (
+            {userDetails?.userType === "user" && (
               <>
                 <Route path="/" element={<User />} />
               </>
@@ -56,7 +56,7 @@ const Router = (props) => {
         {/* Protected Routes */}
         <Route element={<Protected isLoggedIn={isLoggedIn} />}>
           {/* Role Auth */}
-          {userDetails?.data?.userType == 1 && (
+          {userDetails?.userType == "admin" && (
             <>
               {console.log("Royutes 2", routes)}
               <Route path={routes.ADMIN} element={<Admin />} />
@@ -76,7 +76,7 @@ const Router = (props) => {
               <Route path={routes.VIEWVER} element={<WorkList />} />
             </>
           )}
-          {userDetails?.data?.userType == 0 && (
+          {userDetails?.userType == "user" && (
             <>
               <Route path={routes.USER} element={<User />} />
               <Route path={routes.WORK_LIST} element={<WorkList />} />
@@ -156,7 +156,7 @@ const Router = (props) => {
               />
             </>
           )}
-          {role !== "admin" && role !== "student" && (
+          {userDetails?.userType !== "admin" && userDetails?.userType !== "student" && (
             <Route path="*" element={<NotFound />} />
           )}
         </Route>
