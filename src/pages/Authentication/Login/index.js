@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import AuthCard from "../../../components/modules/authentication/authCard";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../../router/helper";
-import { notifyError, notifySuccess } from "../../../utils/toasts";
 import { Swal } from "sweetalert2";
 import HorizontalLine from "../../../components/elements/horizontalLine";
 import toast, { Toaster } from "react-hot-toast";
+import { login, useLoginMutation } from "../../../axios/api";
+import { useDispatch } from "react-redux";
 
 const Login = (props) => {
   const { onLogin } = props;
-  console.log(onLogin);
+  console.log(onLogin, "sanoxisanox");
   // Hooks
   const navigate = useNavigate();
 
@@ -25,56 +26,73 @@ const Login = (props) => {
 
   // });
 
-  const onSubmit = async (value) => {
-    console.log(value, "sadsaf");
-    let getUserEmail = localStorage.getItem("stEmail");
-    let getUserPass = localStorage.getItem("stPassword");
-    let getAdminEmail = localStorage.getItem("adEmail");
-    let getAdminPass = localStorage.getItem("adPassword");
+  // const onSubmit = async (value) => {
+  //   console.log(value, "sadsaf");
+  //   let getUserEmail = localStorage.getItem("stEmail");
+  //   let getUserPass = localStorage.getItem("stPassword");
+  //   let getAdminEmail = localStorage.getItem("adEmail");
+  //   let getAdminPass = localStorage.getItem("adPassword");
 
-    console.log(getUserEmail);
+  //   console.log(getUserEmail);
 
-    if (getUserEmail == value.email && getUserPass == value.password) {
-      localStorage.setItem("role", "student");
-      toast.success('Successfully Student Login!')
-      onLogin();
-      setTimeout(() => {
-        navigate(routes.USER);
-      }, 1500);
-    } else if (getAdminEmail == value.email && getAdminPass == value.password) {
-      localStorage.setItem("role", "admin");
-      toast.success('Successfully Admin Login!')
-      onLogin();
-      setTimeout(() => {
-        navigate(routes.ADMIN);
-      }, 1500);
+  //   if (getUserEmail == value.email && getUserPass == value.password) {
+  //     localStorage.setItem("role", "student");
+  //     toast.success("Successfully Student Login!");
+  //     onLogin();
+  //     setTimeout(() => {
+  //       navigate(routes.USER);
+  //     }, 1500);
+  //   } else if (getAdminEmail == value.email && getAdminPass == value.password) {
+  //     localStorage.setItem("role", "admin");
+  //     toast.success("Successfully Admin Login!");
+  //     onLogin();
+  //     setTimeout(() => {
+  //       navigate(routes.ADMIN);
+  //     }, 1500);
+  //   } else {
+  //     toast.error("Invalid Credentials!");
+  //   }
 
-    } else {
-      toast.error('Invalid Credentials!')
-    }
+  //   // console.log(value)
+  //   //   const existedEmail = data.filter((item) => item.email === value.email);
+  //   //   if (existedEmail.length > 0) {
+  //   //     toast.error("User Already Exist!");
+  //   //   } else {
+  //   //     let date = new  Date().toISOString().slice(0, 10);
 
-    // console.log(value)
-    //   const existedEmail = data.filter((item) => item.email === value.email);
-    //   if (existedEmail.length > 0) {
-    //     toast.error("User Already Exist!");
-    //   } else {
-    //     let date = new  Date().toISOString().slice(0, 10);
+  //   //     Object.assign(value, { id: shortid.generate() });
+  //   //     Object.assign(value, { createdAt: date });
 
-    //     Object.assign(value, { id: shortid.generate() });
-    //     Object.assign(value, { createdAt: date });
+  //   //     if (dispatch(addUser(value))) {
+  //   //       toast.success("User Created Successfully!");
+  //   //       navigate("/user");
+  //   //     }
+  //   //   }
+  // };
 
-    //     if (dispatch(addUser(value))) {
-    //       toast.success("User Created Successfully!");
-    //       navigate("/user");
-    //     }
-    //   }
+  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+
+  const loginMutation = useLoginMutation(dispatch, setData, navigate);
+
+  const onSubmit = (value) => {
+    console.log("Data???", value);
+    loginMutation.mutate(value, {
+      onSuccess: (data) => {
+        console.log("TaimorData", data);
+        // onLogin();
+        // setTimeout(() => {
+        //   navigate(routes.USER);
+        // }, 1500);
+      },
+      onError: (error) => {
+        // Handle error
+      },
+    });
   };
+
   return (
     <>
-      <Toaster
-        position="bottom-right"
-        reverseOrder={false}
-      />
       <HorizontalLine
         title="Login"
         marginTop="80px"
@@ -86,7 +104,6 @@ const Login = (props) => {
       <AuthCard
         title="Login"
         id="login"
-
         schema={regSchema}
         onSubmit={onSubmit}
         height="70vh"
@@ -104,7 +121,9 @@ const Login = (props) => {
             type: "text",
             label: "Email *",
             placeholder: "Enter Your email",
-            margin: "10px 0 10px 0",
+            //margin: "10px 0 10px 0",
+            margin: "18px 55px",
+            padding: "20px 20px",
           },
 
           {
@@ -112,14 +131,16 @@ const Login = (props) => {
             type: "password",
             label: "Password *",
             placeholder: "Enter Your Password",
-            margin: "10px 0 10px 0",
+            //margin: "10px 0 10px 0",
+            margin: "18px 55px",
+            padding: "20px 20px",
           },
         ]}
         button={{
           buttonText: "LOG IN",
           padding: "10px 0",
           width: "80%",
-          margin: "-20px 0 20px 0"
+          margin: "-20px 0 20px 0",
         }}
         handle={handle}
       />

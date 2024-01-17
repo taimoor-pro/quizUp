@@ -2,7 +2,7 @@ Node V: 18
 
 npm install --global yarn
 
-yarn install --legacy-peer-deps (For All Packages Install)
+yarn install (For All Packages Install)
 
 yarn add pakageName (if any add new package)
 

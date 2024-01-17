@@ -29,7 +29,7 @@ const AuthCard = (props) => {
     fontSize,
     schema,
     padding,
-    boxShadow
+    boxShadow,
   } = props;
   const {
     handleSubmit,
@@ -48,7 +48,6 @@ const AuthCard = (props) => {
 
   return (
     <>
-
       <div
         className="mainwrapper"
         style={{
@@ -64,7 +63,6 @@ const AuthCard = (props) => {
             fontSize={fontSize ? fontSize : "40px"}
             fontWeight="bolder"
             padding="20px 0"
-
           />
           <Row
             className={`align-items-center text-center ${getColumnClass()}`}
@@ -75,7 +73,7 @@ const AuthCard = (props) => {
               padding: padding ? padding : "",
               boxShadow: boxShadow ? boxShadow : "",
               borderRadius: "5px",
-              margin: margin ? margin : ""
+              margin: margin ? margin : "",
             }}
           >
             <Col md={12}>
@@ -89,7 +87,11 @@ const AuthCard = (props) => {
                         control={control}
                         render={({ field }) => (
                           <div className={getColumnClass()}>
-                            <Label text={item.label} padding="10px 20px" margin="20px 0 0 0" />
+                            <Label
+                              text={item.label}
+                              padding="10px 20px"
+                              margin="20px 0 0 0"
+                            />
                             <Input
                               type={item?.type}
                               placeholder={item?.placeholder}
@@ -103,8 +105,8 @@ const AuthCard = (props) => {
                               margin="10px 0 0 0"
                             />
                             {errors[item.id] && (
-                              <p 
-                              className="m-0 pt-1 fw-bold"
+                              <p
+                                className="m-0 pt-1 fw-bold"
                                 style={{
                                   color: "#D24545",
                                   width: "100%",
@@ -120,12 +122,16 @@ const AuthCard = (props) => {
 
                     {select?.map((item) => (
                       <Controller
-                        key={item.id} 
+                        key={item.id}
                         name={item.id}
                         control={control}
                         render={({ field }) => (
                           <div className={getColumnClass()}>
-                            <Label text={item.label} padding="10px 20px" margin="20px 0 0 0" />
+                            <Label
+                              text={item.label}
+                              padding="10px 20px"
+                              margin="20px 0 0 0"
+                            />
 
                             <Select
                               field={field}
@@ -136,9 +142,9 @@ const AuthCard = (props) => {
                               options={item.options}
                               padding="10px 20px"
                             />
-                             {errors[item.id] && (
-                              <p 
-                              className="m-0 pt-1 fw-bold"
+                            {errors[item.id] && (
+                              <p
+                                className="m-0 pt-1 fw-bold"
                                 style={{
                                   color: "#D24545",
                                   width: "100%",
@@ -198,9 +204,15 @@ const AuthCard = (props) => {
 
           {signUp && (
             <>
-              <div className="mt-2 text-center my-4" style={{ fontSize: "20px", fontWeight: "500" }}>
+              <div
+                className="mt-2 text-center my-4"
+                style={{ fontSize: "20px", fontWeight: "500" }}
+              >
                 <span className="text-white me-2 fs-5">{signUp}</span>
-                <Link className="text-white text-decoration-none fs-5" to="/signup">
+                <Link
+                  className="text-white text-decoration-none fs-5"
+                  to="/signup"
+                >
                   Create An Account
                 </Link>
               </div>

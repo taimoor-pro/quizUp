@@ -14,6 +14,7 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Label from "../../elements/label";
+import { render } from "@testing-library/react";
 
 const ProfileModal = (props) => {
   const { open, handleClose, id, inputFeildsData, select } = props;
@@ -46,7 +47,6 @@ const ProfileModal = (props) => {
         return null;
     }
   };
-
   const selectedSchema = getSchema();
 
   const {

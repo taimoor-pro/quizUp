@@ -28,9 +28,9 @@ function NavBar(props) {
     updateProfile,
     inputFeildsData,
     select,
+    schema,
+    onSubmit,
   } = props;
-
-  console.log(feildsData, "asocuxsa");
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -41,6 +41,8 @@ function NavBar(props) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+
 
   return (
     <>
@@ -165,6 +167,8 @@ function NavBar(props) {
         title={updateProfile}
         inputFeildsData={inputFeildsData}
         select={select}
+        schema={schema}
+        onSubmit={onSubmit}
       />
     </>
   );

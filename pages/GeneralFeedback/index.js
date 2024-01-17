@@ -1,24 +1,8 @@
 import React from "react";
 import DataTable from "../../components/modules/DataTable";
-import { getAdminCaseList } from "../../axios/api";
-import { useQuery } from "react-query";
+import NavBar from "../../components/modules/Navbar";
 
 const GeneralFeedback = () => {
-  const { data, isLoading, isError } = useQuery(
-    "adminCaseList",
-    getAdminCaseList
-  );
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (isError) {
-    return <p>Error fetching data</p>;
-  }
-
-  console.log(data, "MY DATA");
-
   return (
     <>
       <DataTable
@@ -48,7 +32,6 @@ const GeneralFeedback = () => {
             heading: "Creation Date",
           },
         ]}
-        DataList={data}
       />
     </>
   );

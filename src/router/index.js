@@ -4,6 +4,7 @@ import { routes } from "./helper";
 
 import Protected from "./Protected";
 import RatingStar from "../components/elements/rating";
+import { useSelector } from "react-redux";
 
 const NotFound = lazy(() => import("../pages/NotFound"));
 const Login = lazy(() => import("../pages/Authentication/Login"));
@@ -22,28 +23,31 @@ const AdminGradedReport = lazy(() => import("../pages/AdminGradedReport"));
 const ResultView = lazy(() => import("../pages/ResultView"));
 
 const Router = (props) => {
-  const { isLoggedIn, onLogin } = props;
+  // const { isLoggedIn } = props;
 
   let role = localStorage.getItem("role");
-
+  const { isLoggedIn } = useSelector((state) => state.authentication);
+  const { userDetails } = useSelector((state) => state.authentication);
+  console.log("isLoggedIn", userDetails);
   return (
     <>
+      {console.log("Royutes 1", routes)}
       <Routes>
         {/* Public Routes */}
 
-        {isLoggedIn && role ? (
+        {isLoggedIn && userDetails?.data?.userType ? (
           <>
-          {
-            role == "admin" && <Route path="/" element={<Admin />} />
-          }
-          {
-            role == "user" &&     <Route path="/" element={<User />} />
-          }
-          
-        
+            {userDetails?.data?.userType == 1 && (
+              <Route path="/" element={<Admin />} />
+            )}
+            {userDetails?.data?.userType === 0 && (
+              <>
+                <Route path="/" element={<User />} />
+              </>
+            )}
           </>
         ) : (
-          <Route path={routes.HOME} element={<Login onLogin={onLogin} />} />
+          <Route path={routes.HOME} element={<Login />} />
         )}
 
         <Route path={routes.FORGOT_PASSWORD} element={<ChangePassword />} />
@@ -52,8 +56,9 @@ const Router = (props) => {
         {/* Protected Routes */}
         <Route element={<Protected isLoggedIn={isLoggedIn} />}>
           {/* Role Auth */}
-          {role === "admin" && (
+          {userDetails?.data?.userType == 1 && (
             <>
+              {console.log("Royutes 2", routes)}
               <Route path={routes.ADMIN} element={<Admin />} />
               <Route path={routes.CREATE_CASE} element={<Admin />} />
 
@@ -71,7 +76,7 @@ const Router = (props) => {
               <Route path={routes.VIEWVER} element={<WorkList />} />
             </>
           )}
-          {role === "student" && (
+          {userDetails?.data?.userType == 0 && (
             <>
               <Route path={routes.USER} element={<User />} />
               <Route path={routes.WORK_LIST} element={<WorkList />} />

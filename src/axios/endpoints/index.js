@@ -1,8 +1,12 @@
 import { client } from "../axios";
 
 export const endpoints = {
-  getFackData: () => {
-    return client.get("products");
+  getAdminCaseList: () => {
+    return client.get("api/Loyalla/AdminCaseList");
+  },
+
+  login: (data) => {
+    return client.post("api/Account/login", data);
   },
 
   register: (data, headers) => {

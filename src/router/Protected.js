@@ -11,7 +11,6 @@ const Protected = (props) => {
   //  Logic
 
   const isUserLoggedIn = isLoggedIn;
-  console.log(isUserLoggedIn, "Login");
   return isUserLoggedIn ? <Outlet /> : <Navigate to="/" />;
 };
 

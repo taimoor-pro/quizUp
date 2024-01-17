@@ -97,15 +97,16 @@ const DataTable = (props) => {
               <div
                 key={item.id}
                 className={`mt-3 text-center row mb-3 p-3 row-spacing`}
-           
               >
-                <div className="col">{item.id}</div>
-                <div className="col">{item.title}</div>
-                <div className="col">{item.price}</div>
-                <div className="col">{item.rating}</div>
-                <div className="col">{item.stock}</div>
-                <div className="col">{item.category}</div>
-                <div className="col">10-12-23</div>
+                <div className="col">{item.caseId}</div>
+                <div className="col">{item.caseName}</div>
+                <div className="col">{item.caseName}</div>
+                <div className="col">{item.comments}</div>
+                <div className="col">{item.creationDate}</div>
+                <div className="col">{item.creationDate}</div>
+                <div className="col">{item.paperName}</div>
+                <div className="col">{item.isActive}</div>
+                <div className="col">{item.creationDate}</div>
               </div>
             ))}
 
@@ -195,7 +196,6 @@ const DataTable = (props) => {
               </>
             )}
           </div>
-
 
           <Pagination
             currentPage={currentPage}
